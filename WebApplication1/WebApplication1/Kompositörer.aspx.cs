@@ -90,10 +90,10 @@ namespace WebApplication1
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into Kompositörer values ('"+TextBox2.Text+"')";
+            cmd.CommandText = "insert into Kompositörer(Kompositör) values ('"+TextBox2.Text+"')";
             cmd.ExecuteNonQuery();
             con.Close();
-            Response.Redirect("default.aspx");
+            Response.Redirect("Kompositörer.aspx");
         }
 
         protected void LinkButton3_Click(object sender, EventArgs e)
@@ -112,5 +112,7 @@ namespace WebApplication1
             GridView1.DataSource = SqlDataSource1;
             GridView1.DataBind();
         }
+
+        
     }
 }
