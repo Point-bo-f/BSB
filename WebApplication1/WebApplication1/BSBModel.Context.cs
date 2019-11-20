@@ -25,7 +25,7 @@ namespace WebApplication1
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Kompositörer> Kompositörer { get; set; }
         public virtual DbSet<Låtar> Låtar { get; set; }
-        public object UploadedFiles { get; internal set; }
     }
 }

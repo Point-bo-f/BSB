@@ -23,13 +23,39 @@
         <p>
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </p>
-        <asp:GridView ID="GridView1" runat="server"  BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" AutoGenerateColumns="False" DataKeyNames="LåtId">
+        <asp:GridView ID="GridView1" runat="server"  BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" AutoGenerateColumns="False" DataKeyNames="LåtId" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
             <Columns>
-                <asp:CommandField ShowEditButton="true" ShowCancelButton="true" ShowDeleteButton="true" />
-                <asp:BoundField DataField="LåtId" HeaderText="LåtId" />
-                <asp:HyperLinkField DataNavigateUrlFields="Titel" DataNavigateUrlFormatString="~/Download/{0}" DataTextField="Titel" HeaderText="Titel" />
-                <asp:BoundField DataField="KompositörId" HeaderText="KompositörId" />
-                <asp:BoundField DataField="Kompositör" HeaderText="Kompositör" />
+                <asp:TemplateField ShowHeader="False">
+                    <EditItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
+                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
+                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="LåtId">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("LåtId") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("LåtId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Titel">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("Titel", "~/Download/{0}") %>' Text='<%# Eval("Titel") %>'></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="KompositörId">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Eval("KompositörId") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("KompositörId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
@@ -41,15 +67,8 @@
             <SortedDescendingCellStyle BackColor="#F6F0C0" />
             <SortedDescendingHeaderStyle BackColor="#7E0000" />
         </asp:GridView>
-            <Columns>
-                <asp:BoundField DataField="LåtId"  HeaderText="LåtId" InsertVisible="False" ReadOnly="True" SortExpression="LåtId" />
-                <asp:BoundField DataField="Titel" HeaderText="Titel" SortExpression="Titel" />
-                <asp:BoundField DataField="KompositörId" HeaderText="KompositörId" SortExpression="KompositörId" />
-                <asp:BoundField DataField="Kompositör" HeaderText="Kompositör" SortExpression="Kompositör" />
-                <asp:BoundField DataField="Blog_url" HeaderText="Blog_url" SortExpression="Blog_url" />
-            </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSB notarkivConnectionString2 %>" SelectCommand="SELECT [LåtId], [Titel], [KompositörId], [Kompositör], [Blog url] AS Blog_url FROM [Låtar]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSB notarkivConnectionString2 %>" SelectCommand="SELECT [LåtId], [Titel], [KompositörId] FROM [Låtar]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

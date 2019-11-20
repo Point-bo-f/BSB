@@ -5,7 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="293fe301c3bb4ad5919bc0075b2c2158" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Låtar" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kompositörer" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.Låtar" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="Model.FK_Kompositörer_Kompositörer" />
+        <AssociationConnector Association="Model.FK_Kompositörer_Låtar" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

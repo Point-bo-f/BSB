@@ -12,6 +12,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using Label = System.Web.UI.WebControls.Label;
 
 namespace WebApplication1
 {
@@ -43,6 +44,7 @@ namespace WebApplication1
             if (FileUpload1.HasFile)
             {
                 string fname = FileUpload1.PostedFile.FileName;
+                string komp = TextBox1.Text;
                 string extension = Path.GetExtension(fname);
                 int flag = 0;
                 switch (extension.ToLower())
@@ -72,6 +74,7 @@ namespace WebApplication1
                     {
                         Label1.Text = "File failed to upload";
                     }
+                    
                 }
                 else
                 {
@@ -92,6 +95,7 @@ namespace WebApplication1
             {
                 GridView1.DataSource = dr;
                 GridView1.DataBind();
+                con.Close();
             }
             else
             {
@@ -102,25 +106,51 @@ namespace WebApplication1
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridView1.EditIndex = e.NewEditIndex;
-            BindData();
+            GridView1.DataSource = SqlDataSource1;
+            GridView1.DataBind();
         }
+        
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            int LåtId = (int)e.Keys["LåtId"];
-            string Titel = (string)e.NewValues["Titel"];
-            int KompositörId = (int)e.NewValues["KompositörId"];
-            string Kompositör = (string)e.NewValues["Kompositör"];
 
+
+            Label LåtId = GridView1.Rows[e.RowIndex].FindControl("Label1") as Label;
+            Label KompositörId = GridView1.Rows[e.RowIndex].FindControl("Label2") as Label;
+            HyperLink Titel = GridView1.Rows[e.RowIndex].FindControl("HyperLink1") as HyperLink;
+            String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
+            String updatedata = "Update Låtar set Titel = '" + Titel + "', KompositörId ='" + KompositörId + "'";
+            SqlConnection con = new SqlConnection(mycon);
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = updatedata;
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
             GridView1.EditIndex = -1;
-            BindData();
+            SqlDataSource1.DataBind();
+            GridView1.DataSource = SqlDataSource1;
+            GridView1.DataBind();
+
+
+
 
 
         }
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int LåtId = (int)e.Keys["LåtId"];
-
-            BindData();
+            
+            Label LåtId = GridView1.Rows[e.RowIndex].FindControl("Label1") as Label;
+            String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
+            String updatedata = "Delete from Låtar where LåtId=" + LåtId.Text;
+            SqlConnection con = new SqlConnection(mycon);
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = updatedata;
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            GridView1.EditIndex = -1;
+            SqlDataSource1.DataBind();
+            GridView1.DataSource = SqlDataSource1;
+            GridView1.DataBind();
         }
         private void BindData()
         {
@@ -139,6 +169,23 @@ namespace WebApplication1
             {
                 BindData();
             }
+        }
+
+        protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView1.EditIndex = -1;
+            GridView1.DataSource = SqlDataSource1;
+            GridView1.DataBind();
+        }
+
+        protected void GridView1_RowEditing1(object sender, GridViewEditEventArgs e)
+        {
+
+        }
+
+        protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+
         }
     }
     }
