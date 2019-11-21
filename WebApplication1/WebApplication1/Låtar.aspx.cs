@@ -44,7 +44,6 @@ namespace WebApplication1
             if (FileUpload1.HasFile)
             {
                 string fname = FileUpload1.PostedFile.FileName;
-                string komp = TextBox1.Text;
                 string extension = Path.GetExtension(fname);
                 int flag = 0;
                 switch (extension.ToLower())
@@ -58,12 +57,14 @@ namespace WebApplication1
                         flag = 0;
                         break;
                 }
+                
+
                 if (flag == 1)
                 {
                     FileUpload1.SaveAs(Server.MapPath("~/Download/" + fname));
                     cmd = new SqlCommand("insert into Låtar(Titel) values ('" + fname + "')", con);
                     con.Open();
-
+                    
                     if (cmd.ExecuteNonQuery() != 0)
                     {
                         Label1.Text = "File uploaded successfully";

@@ -12,9 +12,10 @@
         <asp:TextBox ID="TextBox1" runat="server" Width="166px" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
         <asp:Label ID="Label2" runat="server" Text="Sök Kompositör"></asp:Label>
         <asp:TextBox ID="TextBox2" runat="server" Width="165px"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Visa" OnClick="Button1_Click" />
         <div>
         </div>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Height="91px" Width="533px" OnDataBinding="Page_Load" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Height="91px" Width="533px"  BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:BoundField DataField="LåtId" HeaderText="LåtId" />
                 
@@ -44,8 +45,7 @@
             <SortedDescendingHeaderStyle BackColor="#7E0000" />
         </asp:GridView>
         <p>
-            <asp:Button ID="Button1" runat="server" Text="Visa" />
-        </p>
+            &nbsp;</p>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSB notarkivConnectionString2 %>" SelectCommand="SELECT Kompositörer.Kompositör, Låtar.Titel, Låtar.LåtId FROM Kompositörer INNER JOIN Låtar ON Kompositörer.KompositörId = Låtar.KompositörId"></asp:SqlDataSource>
     </form>
 </body>
