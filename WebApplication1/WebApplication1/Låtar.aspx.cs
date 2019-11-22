@@ -61,8 +61,20 @@ namespace WebApplication1
                 if (flag == 1)
                 {
                     FileUpload1.SaveAs(Server.MapPath("~/Download/" + fname));
-                    cmd = new SqlCommand("insert into Låtar(Titel) values ('" + fname + "')", con);
-                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT*FROM Låtar";
+                    con.Open();                    
+                    //cmd = new SqlCommand("insert into Låtar(Titel) values ('" + fname + "'),", con);
+                    string Sql = "INSERT INTO Låtar(Titel, KompositörId) VALUES (@Titel, @KompositörId)";
+                    SqlCommand exeSql = new SqlCommand(Sql, con);
+                     
+                    exeSql.Parameters.AddWithValue("@Titel", fname);
+                    exeSql.Parameters.AddWithValue("@KompositörId", TextBox1.Text);                
+                    exeSql.ExecuteNonQuery();                
+                    
+                    
+
 
                     if (cmd.ExecuteNonQuery() != 0)
                     {
@@ -75,6 +87,7 @@ namespace WebApplication1
                         Label1.Text = "File failed to upload";
                     }
                     
+
                 }
                 else
                 {
