@@ -16,14 +16,17 @@
             <asp:FileUpload ID="FileUpload1" runat="server" />
         </p>
         <p>
-            File Name
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            KompostörId
+            <asp:TextBox ID="txtKomp" runat="server"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Label ID="Label3" runat="server" Text="SvitId"></asp:Label>
+            <asp:TextBox ID="txtSvit" runat="server" OnTextChanged="TextBox3_TextChanged" style="margin-left: 25px" Width="220px"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Upload" OnClick="Button1_Click" />
         </p>
         <p>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        </p>
-        <asp:GridView ID="GridView1" runat="server"  BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" AutoGenerateColumns="False" DataKeyNames="LåtId" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
+            &nbsp;</p>
+        <asp:GridView ID="GridView1" runat="server"  BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" AutoGenerateColumns="False" DataKeyNames="LåtId" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Height="222px" style="margin-bottom: 83px" Font-Size="Large">
             <Columns>
                 <asp:TemplateField ShowHeader="False">
                     <EditItemTemplate>
@@ -56,6 +59,14 @@
                         <asp:Label ID="Label2" runat="server" Text='<%# Eval("KompositörId") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="SvitId">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" OnTextChanged="TextBox3_TextChanged1"></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("SvitId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
@@ -68,7 +79,7 @@
             <SortedDescendingHeaderStyle BackColor="#7E0000" />
         </asp:GridView>
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSB notarkivConnectionString3 %>" SelectCommand="SELECT [LåtId], [Titel], [KompositörId] FROM [Låtar]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BSB notarkivConnectionString2 %>" SelectCommand="SELECT [LåtId], [Titel], [KompositörId], [SvitId] FROM [Låtar]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

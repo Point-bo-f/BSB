@@ -233,6 +233,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Sviter.aspx" />
     <Content Include="SångerKompositörer.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -349,6 +350,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Sviter.aspx.cs">
+      <DependentUpon>Sviter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sviter.aspx.designer.cs">
+      <DependentUpon>Sviter.aspx</DependentUpon>
     </Compile>
     <Compile Include="SångerKompositörer.aspx.cs">
       <DependentUpon>SångerKompositörer.aspx</DependentUpon>

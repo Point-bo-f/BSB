@@ -56,11 +56,13 @@ namespace WebApplication1
         {
             string Titel = TextBox1.Text;
             string Kompositör = TextBox2.Text;
+            string Svit = TextBox3.Text;
             string Filter = "";
 
 
             if (Titel != "") { Filter = Filter + "Titel like '%" + Titel + "%' and "; }
             if (Kompositör != "") { Filter = Filter + "Kompositör like '%" + Kompositör + "%' and "; }
+            if (Svit != "") { Filter = Filter + "Svit like '%" + Svit + "%' and "; }
 
             if (Filter.Length > 0)
             {
