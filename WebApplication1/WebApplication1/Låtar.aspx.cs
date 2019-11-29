@@ -62,7 +62,7 @@ namespace WebApplication1
                 if (flag == 1)
                 {
                     FileUpload1.SaveAs(Server.MapPath("~/Download/" + fname));
-                    cmd = new SqlCommand("insert into Låtar(Titel) values ('" + fname + "')", con);
+                    cmd = new SqlCommand("insert into Låtar(Titel, KompositörId, SvitId) values ('" + fname + "', '" + TextBox4.Text + "', '" + TextBox5.Text + "')", con);
                     con.Open();
                     
                     if (cmd.ExecuteNonQuery() != 0)

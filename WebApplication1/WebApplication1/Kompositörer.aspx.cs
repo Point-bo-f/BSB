@@ -87,13 +87,13 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into Kompositörer(Kompositör) values ('"+TextBox2.Text+"')";
-            cmd.ExecuteNonQuery();
-            con.Close();
-            Response.Redirect("Kompositörer.aspx");
+            //con.Open();
+            //SqlCommand cmd = con.CreateCommand();
+            //cmd.CommandType = CommandType.Text;
+            //cmd.CommandText = "insert into Kompositörer(Kompositör) values ('"+TextBox1.Text+"')";
+            //cmd.ExecuteNonQuery();
+            //con.Close();
+            //Response.Redirect("Kompositörer.aspx");
         }
 
         protected void LinkButton3_Click(object sender, EventArgs e)
@@ -113,6 +113,11 @@ namespace WebApplication1
             GridView1.DataBind();
         }
 
-        
+        protected void LinkButton3_Click1(object sender, EventArgs e)
+        {
+            SqlDataSource1.InsertParameters["Kompositör"].DefaultValue = ((TextBox)GridView1.FooterRow.FindControl("TextBox3")).Text;
+
+            SqlDataSource1.Insert();
+        }
     }
 }

@@ -16,7 +16,11 @@
             <asp:FileUpload ID="FileUpload1" runat="server" />
         </p>
         <p>
-            &nbsp;<asp:Button ID="Button1" runat="server" Text="Upload" OnClick="Button1_Click" />
+            <asp:Label ID="Label4" runat="server" Text="KompositörId"></asp:Label>
+            &nbsp;<asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <asp:Label ID="Label5" runat="server" Text="SvitId"></asp:Label>
+            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Upload" OnClick="Button1_Click" />
         </p>
         <p>
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
@@ -52,6 +56,14 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label2" runat="server" Text='<%# Eval("KompositörId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SvitId">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("SvitId") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("SvitId") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
