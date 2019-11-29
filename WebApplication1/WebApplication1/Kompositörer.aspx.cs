@@ -88,34 +88,30 @@ namespace WebApplication1
             GridView1.DataBind();
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into Kompositörer values ('"+TextBox2.Text+"')";
-            cmd.ExecuteNonQuery();
-            con.Close();
-            Response.Redirect("Kompositörer.aspx");
-        }
+        
 
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
-          
+            SqlDataSource1.InsertParameters["Kompositör"].DefaultValue = ((TextBox)GridView1.FooterRow.FindControl("TextBox4")).Text;
 
-            TextBox KompositörId = GridView1.FooterRow.FindControl("TextBox3") as TextBox;
-            TextBox Kompositör = GridView1.FooterRow.FindControl("TextBox4") as TextBox;
-            String query = "insert into Kompositörer(KompositörId, Kompositör) values('" + KompositörId.Text + "','" + Kompositör.Text + "'";
-            String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
-            SqlConnection con = new SqlConnection(mycon);
-            con.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = query;
-            cmd.Connection = con;
-            cmd.ExecuteNonQuery();
-            SqlDataSource1.DataBind();
-            GridView1.DataSource = SqlDataSource1;
-            GridView1.DataBind();
+            SqlDataSource1.Insert();
+
+            
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Låtar.aspx");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Sviter.aspx");
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SökAllt.aspx");
         }
     }
 }

@@ -140,7 +140,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="MyModel.edmx">
@@ -149,8 +148,7 @@
     </EntityDeploy>
     <Content Include="Kompositörer.aspx" />
     <Content Include="Låtar.aspx" />
-    <Content Include="LåtarJOINkompositörer.aspx" />
-    <Content Include="LåtarPDF.aspx" />
+    <Content Include="SökAllt.aspx" />
     <Content Include="MyModel.edmx.diagram">
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Content>
@@ -197,6 +195,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\BSBnotarkiv - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -273,13 +272,6 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="DataClassesDataContext.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,19 +298,12 @@
     <Compile Include="Låtar.cs">
       <DependentUpon>BSBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LåtarJOINkompositörer.aspx.cs">
-      <DependentUpon>LåtarJOINkompositörer.aspx</DependentUpon>
+    <Compile Include="SökAllt.aspx.cs">
+      <DependentUpon>SökAllt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LåtarJOINkompositörer.aspx.designer.cs">
-      <DependentUpon>LåtarJOINkompositörer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LåtarPDF.aspx.cs">
-      <DependentUpon>LåtarPDF.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LåtarPDF.aspx.designer.cs">
-      <DependentUpon>LåtarPDF.aspx</DependentUpon>
+    <Compile Include="SökAllt.aspx.designer.cs">
+      <DependentUpon>SökAllt.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyModel.Context.cs">
       <AutoGen>True</AutoGen>

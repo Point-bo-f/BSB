@@ -66,8 +66,9 @@
             <asp:Parameter Name="original_Kompositör" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" Text="Button"/>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Låtar" />
+    <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Sviter" />
+    <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Visa allt" />
 </form>
 
 

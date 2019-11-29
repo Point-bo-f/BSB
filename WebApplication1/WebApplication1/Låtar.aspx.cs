@@ -63,9 +63,9 @@ namespace WebApplication1
                     FileUpload1.SaveAs(Server.MapPath("~/Download/" + fname));
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"SELECT Titel, KompositörId, SvitId FROM Låtar";
+                    cmd.CommandText = @"SELECT * FROM Låtar";
                     con.Open();           
-                    string Sql = "INSERT INTO Låtar(Titel, KompositörId, SvitId) VALUES (@Titel, @KompositörId, @SvitId)";
+                    string Sql = "INSERT INTO Låtar (Titel, KompositörId, SvitId) VALUES (@Titel, @KompositörId, @SvitId)";
                     SqlCommand exeSql = new SqlCommand(Sql, con);                     
                     exeSql.Parameters.AddWithValue("@Titel", fname);
                     exeSql.Parameters.AddWithValue("@KompositörId", txtKomp.Text);
@@ -77,25 +77,25 @@ namespace WebApplication1
 
                     if (cmd.ExecuteNonQuery() != 0)
                     {
-                        //Label1.Text = "File uploaded successfully";
-                        //con.Close();
-                        //GridDisplayFiles();
+                        Label4.Text = "File uploaded successfully";
+                        con.Close();
+                        GridDisplayFiles();
                     }
                     else
                     {
-                        //Label1.Text = "File failed to upload";
+                        Label4.Text = "File failed to upload";
                     }
                     
 
                 }
                 else
                 {
-                    //Label1.Text = "Only .doc, .docx and .pdf file is allowed";
+                    Label4.Text = "Only .doc, .docx and .pdf file is allowed";
                 }
             }
             else
             {
-                //Label1.Text = "Select the file";
+                Label4.Text = "Select the file";
             }
         }
         private void GridDisplayFiles()
@@ -126,23 +126,22 @@ namespace WebApplication1
         {
 
 
-            Label LåtId = GridView1.Rows[e.RowIndex].FindControl("Label1") as Label;
-            TextBox KompositörId = GridView1.Rows[e.RowIndex].FindControl("TextBox2") as TextBox;
+            TextBox Id = GridView1.Rows[e.RowIndex].FindControl("TextBox1") as TextBox;
             TextBox SvitId = GridView1.Rows[e.RowIndex].FindControl("TextBox3") as TextBox;
+            TextBox KompositörId = GridView1.Rows[e.RowIndex].FindControl("TextBox2") as TextBox;
             HyperLink Titel = GridView1.Rows[e.RowIndex].FindControl("HyperLink1") as HyperLink;
             String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = @"SELECT Titel, KompositörId, SvitId FROM Låtar";           
+            String updatedata = "Update Låtar set KompositörId='" + KompositörId.Text + "', SvitId='" + SvitId.Text + "' where LåtId =" + Convert.ToInt32(Id.Text);
+            SqlConnection con = new SqlConnection(mycon);
             con.Open();
-            string Sql = "INSERT INTO Låtar(Titel, KompositörId, SvitId) VALUES (@Titel, @KompositörId, @SvitId)";
-            SqlCommand exeSql = new SqlCommand(Sql, con);
-            exeSql.Parameters.AddWithValue("@Titel", txtSvit.Text);
-            exeSql.Parameters.AddWithValue("@KompositörId", txtSvit.Text);
-            exeSql.Parameters.AddWithValue("@SvitId", txtSvit.Text);
-
-            exeSql.ExecuteNonQuery();
-
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = updatedata;
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            GridView1.EditIndex = -1;
+            SqlDataSource1.DataBind();
+            GridView1.DataSource = SqlDataSource1;
+            GridView1.DataBind();
 
 
 
@@ -191,24 +190,19 @@ namespace WebApplication1
             GridView1.DataBind();
         }
 
-        protected void GridView1_RowEditing1(object sender, GridViewEditEventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Kompositörer.aspx");
         }
 
-        protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void Button3_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Sviter.aspx");
         }
 
-        protected void TextBox3_TextChanged(object sender, EventArgs e)
+        protected void Button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void TextBox3_TextChanged1(object sender, EventArgs e)
-        {
-
+            Response.Redirect("SökAllt.aspx");
         }
     }
     }
