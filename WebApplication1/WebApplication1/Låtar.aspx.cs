@@ -90,7 +90,7 @@ namespace WebApplication1
         private void GridDisplayFiles()
         {
             con.Open();
-            cmd = new SqlCommand("select*from Låtar", con);
+            cmd = new SqlCommand("select LåtId, Titel, KompositörId, SvitId from Låtar", con);
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
@@ -115,11 +115,12 @@ namespace WebApplication1
         {
 
 
-            Label LåtId = GridView1.Rows[e.RowIndex].FindControl("Label1") as Label;
-            Label KompositörId = GridView1.Rows[e.RowIndex].FindControl("Label2") as Label;
+            TextBox LåtId = GridView1.Rows[e.RowIndex].FindControl("TextBox1") as TextBox;
+            TextBox KompositörId = GridView1.Rows[e.RowIndex].FindControl("TextBox2") as TextBox;
+            TextBox SvitId = GridView1.Rows[e.RowIndex].FindControl("TextBox3") as TextBox;
             HyperLink Titel = GridView1.Rows[e.RowIndex].FindControl("HyperLink1") as HyperLink;
             String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
-            String updatedata = "Update Låtar set Titel = '" + Titel + "', KompositörId ='" + KompositörId + "'";
+            String updatedata = "Update Låtar set Titel = '" + Titel.Text + "', KompositörId ='" + KompositörId.Text + "', SvitId='" + SvitId.Text + "' where LåtId=" + Convert.ToInt32(LåtId.Text);
             SqlConnection con = new SqlConnection(mycon);
             con.Open();
             SqlCommand cmd = new SqlCommand();
