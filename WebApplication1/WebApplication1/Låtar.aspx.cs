@@ -24,7 +24,6 @@ namespace WebApplication1
         public object DataList1 { get; private set; }
         public object Label2 { get; private set; }
         public object ToLower { get; private set; }
-        
 
         protected void Page_Load(object sender, EventArgs e)
 
@@ -44,7 +43,7 @@ namespace WebApplication1
         {
             if (FileUpload1.HasFile)
             {
-                string fname = FileUpload1.PostedFile.FileName;                
+                string fname = FileUpload1.PostedFile.FileName;
                 string extension = Path.GetExtension(fname);
                 int flag = 0;
                 switch (extension.ToLower())
@@ -58,44 +57,34 @@ namespace WebApplication1
                         flag = 0;
                         break;
                 }
+                
+
                 if (flag == 1)
                 {
                     FileUpload1.SaveAs(Server.MapPath("~/Download/" + fname));
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"SELECT * FROM Låtar";
-                    con.Open();           
-                    string Sql = "INSERT INTO Låtar (Titel, KompositörId, SvitId) VALUES (@Titel, @KompositörId, @SvitId)";
-                    SqlCommand exeSql = new SqlCommand(Sql, con);                     
-                    exeSql.Parameters.AddWithValue("@Titel", fname);
-                    exeSql.Parameters.AddWithValue("@KompositörId", txtKomp.Text);
-                    exeSql.Parameters.AddWithValue("@SvitId", txtSvit.Text);
-                    exeSql.ExecuteNonQuery();                
+                    cmd = new SqlCommand("insert into Låtar(Titel) values ('" + fname + "')", con);
+                    con.Open();
                     
-                    
-
-
                     if (cmd.ExecuteNonQuery() != 0)
                     {
-                        Label4.Text = "File uploaded successfully";
+                        Label1.Text = "File uploaded successfully";
                         con.Close();
                         GridDisplayFiles();
                     }
                     else
                     {
-                        Label4.Text = "File failed to upload";
+                        Label1.Text = "File failed to upload";
                     }
                     
-
                 }
                 else
                 {
-                    Label4.Text = "Only .doc, .docx and .pdf file is allowed";
+                    Label1.Text = "Only .doc, .docx and .pdf file is allowed";
                 }
             }
             else
             {
-                Label4.Text = "Select the file";
+                Label1.Text = "Select the file";
             }
         }
         private void GridDisplayFiles()
@@ -111,7 +100,7 @@ namespace WebApplication1
             }
             else
             {
-                //Label1.Text = "Nothing is available";
+                Label1.Text = "Nothing is available";
             }
 
         }
@@ -126,12 +115,11 @@ namespace WebApplication1
         {
 
 
-            TextBox Id = GridView1.Rows[e.RowIndex].FindControl("TextBox1") as TextBox;
-            TextBox SvitId = GridView1.Rows[e.RowIndex].FindControl("TextBox3") as TextBox;
-            TextBox KompositörId = GridView1.Rows[e.RowIndex].FindControl("TextBox2") as TextBox;
+            Label LåtId = GridView1.Rows[e.RowIndex].FindControl("Label1") as Label;
+            Label KompositörId = GridView1.Rows[e.RowIndex].FindControl("Label2") as Label;
             HyperLink Titel = GridView1.Rows[e.RowIndex].FindControl("HyperLink1") as HyperLink;
             String mycon = "Data Source = LAPTOP-86R6N3K7\\SQLEXBOBBEFU; Initial catalog=BSB notarkiv; Integrated Security=True";
-            String updatedata = "Update Låtar set KompositörId='" + KompositörId.Text + "', SvitId='" + SvitId.Text + "' where LåtId =" + Convert.ToInt32(Id.Text);
+            String updatedata = "Update Låtar set Titel = '" + Titel + "', KompositörId ='" + KompositörId + "'";
             SqlConnection con = new SqlConnection(mycon);
             con.Open();
             SqlCommand cmd = new SqlCommand();
@@ -142,6 +130,7 @@ namespace WebApplication1
             SqlDataSource1.DataBind();
             GridView1.DataSource = SqlDataSource1;
             GridView1.DataBind();
+
 
 
 
@@ -166,7 +155,7 @@ namespace WebApplication1
         }
         private void BindData()
         {
-            SqlCommand cmd = new SqlCommand("select LåtId, Titel, KompositörId, SvitId from Låtar", con);
+            SqlCommand cmd = new SqlCommand("select LåtId, Titel, KompositörId, Kompositör from Låtar", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -190,19 +179,14 @@ namespace WebApplication1
             GridView1.DataBind();
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void GridView1_RowEditing1(object sender, GridViewEditEventArgs e)
         {
-            Response.Redirect("Kompositörer.aspx");
+
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
         {
-            Response.Redirect("Sviter.aspx");
-        }
 
-        protected void Button4_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("SökAllt.aspx");
         }
     }
     }
