@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kompositörer">
+          <Key>
+            <PropertyRef Name="KompositörId" />
+          </Key>
+          <Property Name="KompositörId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kompositör" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Låtar">
+          <Key>
+            <PropertyRef Name="LåtId" />
+          </Key>
+          <Property Name="LåtId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KompositörId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Kompositörer_Kompositörer">
+          <End Role="Kompositörer" Type="Self.Kompositörer" Multiplicity="1" />
+          <End Role="Kompositörer1" Type="Self.Kompositörer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Kompositörer">
+              <PropertyRef Name="KompositörId" />
+            </Principal>
+            <Dependent Role="Kompositörer1">
+              <PropertyRef Name="KompositörId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kompositörer_Låtar">
+          <End Role="Kompositörer" Type="Self.Kompositörer" Multiplicity="0..1" />
+          <End Role="Låtar" Type="Self.Låtar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompositörer">
+              <PropertyRef Name="KompositörId" />
+            </Principal>
+            <Dependent Role="Låtar">
+              <PropertyRef Name="KompositörId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Kompositörer" EntityType="Self.Kompositörer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Låtar" EntityType="Self.Låtar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kompositörer_Kompositörer" Association="Self.FK_Kompositörer_Kompositörer">
+            <End Role="Kompositörer" EntitySet="Kompositörer" />
+            <End Role="Kompositörer1" EntitySet="Kompositörer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kompositörer_Låtar" Association="Self.FK_Kompositörer_Låtar">
+            <End Role="Kompositörer" EntitySet="Kompositörer" />
+            <End Role="Låtar" EntitySet="Låtar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BSB_notarkivEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kompositörer" EntityType="Model.Kompositörer" />
+          <EntitySet Name="Låtar" EntityType="Model.Låtar" />
+          <AssociationSet Name="FK_Kompositörer_Kompositörer" Association="Model.FK_Kompositörer_Kompositörer">
+            <End Role="Kompositörer" EntitySet="Kompositörer" />
+            <End Role="Kompositörer1" EntitySet="Kompositörer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kompositörer_Låtar" Association="Model.FK_Kompositörer_Låtar">
+            <End Role="Kompositörer" EntitySet="Kompositörer" />
+            <End Role="Låtar" EntitySet="Låtar" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Kompositörer">
+          <Key>
+            <PropertyRef Name="KompositörId" />
+          </Key>
+          <Property Name="KompositörId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kompositör" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kompositörer1" Relationship="Model.FK_Kompositörer_Kompositörer" FromRole="Kompositörer" ToRole="Kompositörer1" />
+          <NavigationProperty Name="Kompositörer2" Relationship="Model.FK_Kompositörer_Kompositörer" FromRole="Kompositörer1" ToRole="Kompositörer" />
+          <NavigationProperty Name="Låtar" Relationship="Model.FK_Kompositörer_Låtar" FromRole="Kompositörer" ToRole="Låtar" />
+        </EntityType>
+        <EntityType Name="Låtar">
+          <Key>
+            <PropertyRef Name="LåtId" />
+          </Key>
+          <Property Name="LåtId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KompositörId" Type="Int32" />
+          <NavigationProperty Name="Kompositörer" Relationship="Model.FK_Kompositörer_Låtar" FromRole="Låtar" ToRole="Kompositörer" />
+        </EntityType>
+        <Association Name="FK_Kompositörer_Kompositörer">
+          <End Type="Model.Kompositörer" Role="Kompositörer" Multiplicity="1" />
+          <End Type="Model.Kompositörer" Role="Kompositörer1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Kompositörer">
+              <PropertyRef Name="KompositörId" />
+            </Principal>
+            <Dependent Role="Kompositörer1">
+              <PropertyRef Name="KompositörId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kompositörer_Låtar">
+          <End Type="Model.Kompositörer" Role="Kompositörer" Multiplicity="0..1" />
+          <End Type="Model.Låtar" Role="Låtar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kompositörer">
+              <PropertyRef Name="KompositörId" />
+            </Principal>
+            <Dependent Role="Låtar">
+              <PropertyRef Name="KompositörId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="BSB_notarkivEntities">
+          <EntitySetMapping Name="Kompositörer">
+            <EntityTypeMapping TypeName="Model.Kompositörer">
+              <MappingFragment StoreEntitySet="Kompositörer">
+                <ScalarProperty Name="Kompositör" ColumnName="Kompositör" />
+                <ScalarProperty Name="KompositörId" ColumnName="KompositörId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Låtar">
+            <EntityTypeMapping TypeName="Model.Låtar">
+              <MappingFragment StoreEntitySet="Låtar">
+                <ScalarProperty Name="KompositörId" ColumnName="KompositörId" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="LåtId" ColumnName="LåtId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
