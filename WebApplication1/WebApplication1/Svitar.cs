@@ -12,9 +12,9 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class Kompositörer
+    public partial class Svitar
     {
-        public int KompositörId { get; set; }
-        public string Kompositör { get; set; }
+        public int SvitId { get; set; }
+        public string Svit { get; set; }
     }
 }

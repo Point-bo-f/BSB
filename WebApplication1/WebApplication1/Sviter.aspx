@@ -14,7 +14,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="Operations" ShowHeader="False">
                     <FooterTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Insert</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton3_Click1">Insert</asp:LinkButton>
                     </FooterTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="SvitId" InsertVisible="False" SortExpression="SvitId">
@@ -61,6 +61,7 @@
             <asp:Parameter Name="Svit" Type="String" />
         </UpdateParameters>
         </asp:SqlDataSource>
+
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Låtar" />
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Kompositörer" />
         <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Visa allt" />

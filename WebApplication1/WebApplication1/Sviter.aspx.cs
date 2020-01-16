@@ -92,7 +92,7 @@ namespace WebApplication1
             
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
+        protected void LinkButton3_Click1(object sender, EventArgs e)
         {
             SqlDataSource1.InsertParameters["Svit"].DefaultValue = ((TextBox)GridView1.FooterRow.FindControl("TextBox2")).Text;
 

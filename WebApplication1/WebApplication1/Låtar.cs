@@ -17,7 +17,6 @@ namespace WebApplication1
         public int LåtId { get; set; }
         public string Titel { get; set; }
         public Nullable<int> KompositörId { get; set; }
-    
-        public virtual Kompositörer Kompositörer { get; set; }
+        public Nullable<int> SvitId { get; set; }
     }
 }

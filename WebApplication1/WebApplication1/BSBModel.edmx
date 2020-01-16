@@ -17,44 +17,21 @@
             <PropertyRef Name="LåtId" />
           </Key>
           <Property Name="LåtId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Titel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="50" />
           <Property Name="KompositörId" Type="int" />
+          <Property Name="SvitId" Type="int" />
         </EntityType>
-        <Association Name="FK_Kompositörer_Kompositörer">
-          <End Role="Kompositörer" Type="Self.Kompositörer" Multiplicity="1" />
-          <End Role="Kompositörer1" Type="Self.Kompositörer" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Kompositörer">
-              <PropertyRef Name="KompositörId" />
-            </Principal>
-            <Dependent Role="Kompositörer1">
-              <PropertyRef Name="KompositörId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Kompositörer_Låtar">
-          <End Role="Kompositörer" Type="Self.Kompositörer" Multiplicity="0..1" />
-          <End Role="Låtar" Type="Self.Låtar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Kompositörer">
-              <PropertyRef Name="KompositörId" />
-            </Principal>
-            <Dependent Role="Låtar">
-              <PropertyRef Name="KompositörId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Svitar">
+          <Key>
+            <PropertyRef Name="SvitId" />
+          </Key>
+          <Property Name="SvitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Svit" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Kompositörer" EntityType="Self.Kompositörer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Låtar" EntityType="Self.Låtar" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Kompositörer_Kompositörer" Association="Self.FK_Kompositörer_Kompositörer">
-            <End Role="Kompositörer" EntitySet="Kompositörer" />
-            <End Role="Kompositörer1" EntitySet="Kompositörer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Kompositörer_Låtar" Association="Self.FK_Kompositörer_Låtar">
-            <End Role="Kompositörer" EntitySet="Kompositörer" />
-            <End Role="Låtar" EntitySet="Låtar" />
-          </AssociationSet>
+          <EntitySet Name="Svitar" EntityType="Self.Svitar" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -63,14 +40,7 @@
         <EntityContainer Name="BSB_notarkivEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Kompositörer" EntityType="Model.Kompositörer" />
           <EntitySet Name="Låtar" EntityType="Model.Låtar" />
-          <AssociationSet Name="FK_Kompositörer_Kompositörer" Association="Model.FK_Kompositörer_Kompositörer">
-            <End Role="Kompositörer" EntitySet="Kompositörer" />
-            <End Role="Kompositörer1" EntitySet="Kompositörer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Kompositörer_Låtar" Association="Model.FK_Kompositörer_Låtar">
-            <End Role="Kompositörer" EntitySet="Kompositörer" />
-            <End Role="Låtar" EntitySet="Låtar" />
-          </AssociationSet>
+          <EntitySet Name="Svitars" EntityType="Model.Svitar" />
         </EntityContainer>
         <EntityType Name="Kompositörer">
           <Key>
@@ -78,44 +48,24 @@
           </Key>
           <Property Name="KompositörId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Kompositör" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Kompositörer1" Relationship="Model.FK_Kompositörer_Kompositörer" FromRole="Kompositörer" ToRole="Kompositörer1" />
-          <NavigationProperty Name="Kompositörer2" Relationship="Model.FK_Kompositörer_Kompositörer" FromRole="Kompositörer1" ToRole="Kompositörer" />
-          <NavigationProperty Name="Låtar" Relationship="Model.FK_Kompositörer_Låtar" FromRole="Kompositörer" ToRole="Låtar" />
         </EntityType>
         <EntityType Name="Låtar">
           <Key>
             <PropertyRef Name="LåtId" />
           </Key>
           <Property Name="LåtId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="KompositörId" Type="Int32" />
-          <NavigationProperty Name="Kompositörer" Relationship="Model.FK_Kompositörer_Låtar" FromRole="Låtar" ToRole="Kompositörer" />
+          <Property Name="SvitId" Type="Int32" />
         </EntityType>
-        <Association Name="FK_Kompositörer_Kompositörer">
-          <End Type="Model.Kompositörer" Role="Kompositörer" Multiplicity="1" />
-          <End Type="Model.Kompositörer" Role="Kompositörer1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Kompositörer">
-              <PropertyRef Name="KompositörId" />
-            </Principal>
-            <Dependent Role="Kompositörer1">
-              <PropertyRef Name="KompositörId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Kompositörer_Låtar">
-          <End Type="Model.Kompositörer" Role="Kompositörer" Multiplicity="0..1" />
-          <End Type="Model.Låtar" Role="Låtar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Kompositörer">
-              <PropertyRef Name="KompositörId" />
-            </Principal>
-            <Dependent Role="Låtar">
-              <PropertyRef Name="KompositörId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        <EntityType Name="Svitar">
+          <Key>
+            <PropertyRef Name="SvitId" />
+          </Key>
+          <Property Name="SvitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Svit" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -132,9 +82,18 @@
           <EntitySetMapping Name="Låtar">
             <EntityTypeMapping TypeName="Model.Låtar">
               <MappingFragment StoreEntitySet="Låtar">
+                <ScalarProperty Name="SvitId" ColumnName="SvitId" />
                 <ScalarProperty Name="KompositörId" ColumnName="KompositörId" />
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
                 <ScalarProperty Name="LåtId" ColumnName="LåtId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Svitars">
+            <EntityTypeMapping TypeName="Model.Svitar">
+              <MappingFragment StoreEntitySet="Svitar">
+                <ScalarProperty Name="Svit" ColumnName="Svit" />
+                <ScalarProperty Name="SvitId" ColumnName="SvitId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

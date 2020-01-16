@@ -27,5 +27,6 @@ namespace WebApplication1
     
         public virtual DbSet<Kompositörer> Kompositörer { get; set; }
         public virtual DbSet<Låtar> Låtar { get; set; }
+        public virtual DbSet<Svitar> Svitars { get; set; }
     }
 }
